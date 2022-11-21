@@ -1,0 +1,36 @@
+:root {
+    --primary: rgb(52 211 153);
+    --secondary: rgb(100 116 139);
+    --ternary: rgba(158,158,158,.2);
+  }
+
+.banner__section{
+    height: 74vh;
+    background-image: url('../../Image//hero_image.PNG');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.shop_now_container{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.shop_now_button{
+    background-color: var(--primary);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 2rem 2rem;
+    transition: .2s;
+    height: 3rem;
+    margin-bottom: 9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.shop_now_button:hover{
+    transform: translateY(-2px);
+}

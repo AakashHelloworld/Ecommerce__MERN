@@ -1,0 +1,30 @@
+.orderSection{
+    background-color: #eff0f5;
+    display: flex;
+    justify-content: center;
+    min-height: 60vh;
+} 
+
+.orderHeroSection{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding-bottom: 3rem;
+    margin-top: 2rem;
+    width: 80%;
+    grid-gap: 3rem;
+}
+
+
+.orderHeroSection__container{
+    padding: 3rem;
+    background-color: white;
+}
+
+.checkoutSection{
+    padding: 3rem;
+    background-color: white;
+}
+
+.single__cart__quantity{
+    font-size: 1.4rem;
+}
