@@ -5,20 +5,29 @@ const orderModule = new mongoose.Schema({
         type:mongoose.Schema.ObjectId,
         required:[true, "cart product must have user"]
     },
-    product:{
-        type:mongoose.Schema.ObjectId,
-        required:[true, "cart product must have product"]
-    },
-    quantity:{
-        type:Number,
-        required:[true, "cart have atleast one item"]
+    orderedItems:Array,
+    location:{
+            type: "string",
+            required: [true, "a location must be there"]
     },
     created: {
         type: Date,
         default: Date.now()
     },
-    completed:{
-        type:Boolean,
+    packaging:{
+        type: Boolean,
+        default: false
+    },
+    traveling:{
+        type: Boolean,
+        default: false
+    },
+    delivered:{
+        type: Boolean,
+        default: false
+    },
+    received:{
+        type: Boolean,
         default: false
     }
 },

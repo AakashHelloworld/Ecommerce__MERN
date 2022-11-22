@@ -200,7 +200,7 @@ const TopFiveProducts = () => {
     <div className='home_products_container'>
             {
                 products.map((data)=>{
-                    return <Link to={`/product/${data.id}`} ><SingleProduct key={data._id} data={data}/></Link>
+                    return <Link key={data._id} to={`/product/${data.id}`} ><SingleProduct  data={data}/></Link>
                 })
 
             }

@@ -3,13 +3,28 @@ import "./ProductHeroSection.css"
 import {AiOutlinePlus, AiOutlineMinus} from "react-icons/ai";
 import {BiLocationPlus} from "react-icons/bi"
 import {BsCashCoin, BsShop} from "react-icons/bs"
-import {CiDeliveryTruck} from "react-icons/ci"
+import {TbTruckDelivery} from "react-icons/tb"
 import { Star } from '../../Utils/Star';
 import axios from "axios"
 import { useGlobalContext } from '../../StateManager/context';
 
 const ProductHeroSection = ({productData}) => {
     const {dispatch} = useGlobalContext();
+
+
+    const calculatingAmout =(passingArgument)=>{
+        let Amount = 0;
+        if(passingArgument.length){
+            passingArgument.forEach(data => {
+                Amount = Amount + data?.quantity*data?.productId?.price
+            });
+            return Amount
+        }else{
+            return Amount
+        }
+
+    }
+
     const cartHandler = async(e)=>{
         const id =productData.id;
         if(id){
@@ -23,10 +38,11 @@ const ProductHeroSection = ({productData}) => {
                         }
 
           instance.post("http://localhost:4000/api/v1/cart", passingCart).then((data)=>{
-            console.log( data.data.data.Cart, "hellao")
-
-            const UpdatedCart = data.data.data.Cart
-            dispatch({type: "UPDATE__CART", payload: UpdatedCart})
+            console.log( data, "hellao")
+            const Amount =calculatingAmout(data.data.data.Cart)
+            const passingArgument ={ Cart: data.data.data.Cart,
+                                    Amount}
+            dispatch({type: "UPDATE__CART", payload: passingArgument})
 
         })
         }
@@ -68,7 +84,7 @@ const ProductHeroSection = ({productData}) => {
                         <button>Change</button>
                     </div>
                     <div className='ProductHeroSection__delivery__detail__one'>
-                        <CiDeliveryTruck className='delivery_icon' />
+                        <TbTruckDelivery className='delivery_icon' />
                         <p>Standard Delivery ( 4 -5 Days )</p>
                         <p>110</p>
                     </div>

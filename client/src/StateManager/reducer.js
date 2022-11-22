@@ -7,11 +7,18 @@ const reducer = (state, action)=>{
             return {...state, ...geting_data}
         }
         case "UPDATE__CART":{
-            const Cart = action.payload;
-            return {...state, Cart}
+            const Cart = action.payload.Cart;
+            const CartAmount = action.payload.Amount;
+            console.log(CartAmount, action.payload)
+            return {...state, Cart, CartAmount}
         }
-        default:{
-            return{...state}
+        case "ADDSUB_CART":{
+            const Cart = action.payload.Cart;
+            const CartAmount = action.payload.Amount;
+            // console.log(action.payload)
+            if(Cart.length){
+                return {...state, Cart, CartAmount}
+            }
         }
 
     }

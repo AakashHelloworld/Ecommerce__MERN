@@ -15,7 +15,7 @@ exports.getAllShops = catchasynchandler(async(req,res)=>{
 
 exports.getShop = catchasynchandler( async (req, res) => {
     console.log("get products details")
-  const shop = await Shop.findById(req.params.shopId).populate('products').populate('reviews');
+  const shop = await Shop.findById(req.params.shopId).populate({path:'products', option:{limit:2}}).populate('reviews');
   res.status(200).json({
     status: 'success',
     data: {

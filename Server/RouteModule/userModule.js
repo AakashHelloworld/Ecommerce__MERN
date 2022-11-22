@@ -46,7 +46,10 @@ const usersschema = new mongoose.Schema({
                 ref: 'Product'
             },
             quantity:{
-                type: Number
+                type: Number,
+                min:[1, "user must have atleast more than 4 character name"],
+                max:[5, "user must have up to 8 character name"]
+                
             }
         }
     ],

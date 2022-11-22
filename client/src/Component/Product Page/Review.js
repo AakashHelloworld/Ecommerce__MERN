@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import "./Review.css"
 import {AiFillStar} from "react-icons/ai"
 import StarRatingComponent from 'react-star-rating-component';
+import {MdOutlineDelete} from "react-icons/md";
 import axios from "axios"
+import { useGlobalContext } from '../../StateManager/context';
 const Star =({num})=>{
     if(num == 1){
         return <div className='review_primary_icons'><AiFillStar className='review_primary_icon'/></div>
@@ -27,8 +29,25 @@ const Star =({num})=>{
 
 
 const SingleReview = ({data}) =>{
+
+    const reviewDeleteHandler = async() =>{
+        const instance = await axios.create({
+            withCredentials: true
+        })
+          instance.delete(`http://localhost:4000/api/v1/reviews/delete/${data._id}`).then((data)=>{
+            console.log(data)
+          });
+    }
+
+    const {Userid} = useGlobalContext();
     return<div className='singleReview'>
+    <div className='singleReviewname_delete'>
                 <h3 className='singleReview__primary'>{data?.user?.Username}</h3>
+
+                { (Userid == data?.user?._id) &&
+                <button onClick={reviewDeleteHandler} className='review__delete'><MdOutlineDelete className='review__delete_icon'/> </button>
+                }
+    </div>
                 {
                     <Star num={data?.rating} />
                 }

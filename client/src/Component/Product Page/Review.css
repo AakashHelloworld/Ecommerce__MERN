@@ -99,3 +99,21 @@
     font-size: 2rem;
     text-align: center;
 }
+
+.singleReviewname_delete{
+    display: flex;
+    justify-content: space-between;
+}
+
+.review__delete{
+    border: none;
+    background-color: transparent;
+}
+.cartQuantity{
+    display: flex;
+    flex-direction: column;
+}
+.review__delete_icon{
+    color: Red;
+    font-size: 1.7rem;
+}

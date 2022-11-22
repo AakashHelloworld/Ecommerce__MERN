@@ -6,16 +6,30 @@ import { useGlobalContext } from '../../StateManager/context';
 const Navbar = () => {
   const [userActive, setUserActive] = useState(false);
   const {dispatch,Username } = useGlobalContext();
+
+  const calculatingAmout =(passingArgument)=>{
+    let Amount = 0;
+    if(passingArgument.length){
+        passingArgument.forEach(data => {
+            Amount = Amount + data?.quantity*data?.productId?.price
+        });
+        return Amount
+    }else{
+        return Amount
+    }
+}
+
   const isMe = async()=>{
     const instance = await axios.create({
       withCredentials: true,
     })
     instance.get("http://localhost:4000/api/v1/users/isme").then((data)=>{
       setUserActive(true)
-      
+      const CartAmount = calculatingAmout(data?.data?.user?.Cart)
       const passingData = {Username: data?.data?.user?.Username,
                            Userid: data?.data?.user?._id,
-                           Cart: data?.data?.user?.Cart
+                           Cart: data?.data?.user?.Cart,
+                           CartAmount
                           }
       dispatch({type: "UPDATE_USER", payload: passingData})
     }).catch((err)=>{
@@ -42,6 +56,7 @@ const Navbar = () => {
         <Link><li>{Username?.toUpperCase()}</li></Link>
         <Link ><li>LOGOFF</li></Link>
         <Link to={"/cart"}><li>CART</li></Link>
+        <Link to={'/order'} >ORDER</Link>
         </>
         }
     </div>

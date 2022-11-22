@@ -11,7 +11,7 @@ const Store = () => {
         <Navbar/>
         <SearchSection/>
         <ShopHeroSection/>
-        <Review />
+        <Review review={[]} />
     </div>
     <Footer />
     </>

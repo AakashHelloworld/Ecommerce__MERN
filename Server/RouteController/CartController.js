@@ -33,9 +33,7 @@ if(!duplicateChecker){
             res.status(401).json({
                 status: 'error',
                 message: 'Create cart is not possible'
-              });
-        }
-})
+              });}})
 
 exports.getAllCart = CatchasyncError(async(req,res)=>{
     const userId = req.user.id;
@@ -52,19 +50,36 @@ exports.getAllCart = CatchasyncError(async(req,res)=>{
 
 exports.updateCart = CatchasyncError(async(req,res)=>{
     const userId = req.user.id;
-    const productId = req.body.productId;
+    const cartId = req.body._id;
     if(userId){
-        const PromiseCart = req.user.Cart?.filter(async(data)=>
+        let getIndex;
+        const  filterCart = req.user.Cart.filter((data, index)=>
         {
-                return (data.product != productId ) 
+
+                if (data._id == cartId){
+                    getIndex = index
+                }
+                return (data._id != cartId ) 
         })
-        const filtercart = Promise.all(PromiseCart);
-        const updateCart = filtercart.push(req.body)
-        req.user.Cart = updateCart;
+        filterCart.splice(getIndex, 0, req.body);
+        console.log(filterCart)
+        req.user.Cart = filterCart;
+        const updateUser = await User.findByIdAndUpdate(userId,{...req.user, Cart:[...filterCart]},{
+            new:true,
+            runValidators:true
+        }).populate({
+            path: 'Cart',
+            populate:{
+                path: 'productId',
+                model: 'Product',
+    
+            }
+        })
+        console.log(updateUser, "hello world");
         res.status(200).json({
-            message:'success',
+            status:'success',
             data:{
-                updateCart 
+                updateUser
             }
         })
     }else{
@@ -73,8 +88,6 @@ exports.updateCart = CatchasyncError(async(req,res)=>{
             message: 'Create cart is not possible'
           });
     }
-
-    
 })
 
 exports.deleteCart = CatchasyncError(async(req,res)=>{
@@ -82,25 +95,29 @@ exports.deleteCart = CatchasyncError(async(req,res)=>{
     const cartId = req.params.CartId;
     // console.log(cartId)
     if(userId){
-        const Cart = req.user?.Cart?.filter((data)=>{
+        const Cart = req.user.Cart.filter((data)=>{
             return(data._id != cartId)
         })
-        console.log(Cart, "hello owrld")
-
-          const updateData = await User.findByIdAndUpdate(userId,{...req.user, Cart},{
-        new: true,
-        runValidators: true
-        })
-
-        console.log(updateData, "hellhhuhuio owrld")
-
-        res.status(200).status({
+        req.user.Cart = Cart;
+        const updateData = await User.findByIdAndUpdate(userId,{...req.user, Cart:[...Cart]},
+            {   
+                new: true,
+                runValidators:true
+            }).populate({
+                path: 'Cart',
+                populate:{
+                    path: 'productId',
+                    model: 'Product',
+        
+                }
+            })
+        // console.log(updateData)
+        res.status(200).json({
             status:'success',
             message:"Deleted Cart!",
-            data:{
-                updateData
-            }
-        })
+            data: updateData
+        } 
+        )
     }else{
         res.status(401).json({
             status: 'error',
