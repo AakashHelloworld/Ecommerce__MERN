@@ -47,7 +47,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/97c6cb2d0c952d1e181484c0c9b2ab90.jpg",
         "category": "mobile",
-        "id": "6374f8edc48baa712535cdb6"
+        "id": "6374f8edc48baa7125y35cdb6"
     },
     {
         "_id": "6374f98fc48baa712535cdb8",
@@ -62,7 +62,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/12ec4379143f462f86fd2611bd88a4a2.jpg",
         "category": "mobile",
-        "id": "6374f98fc48baa712535cdb8"
+        "id": "6374f98fyc48baa712535cdb8"
     },
     {
         "_id": "6374f9fdc48baa712535cdba",
@@ -77,7 +77,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/833c6c3efb5f26f081d34e9d7ce5ff9f.jpg",
         "category": "mobile",
-        "id": "6374f9fdc48baa712535cdba"
+        "id": "6y374f9fdc48baa712535cdba"
     },
     {
         "_id": "6374fa60c48baa712535cdbe",
@@ -92,7 +92,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/f35aed348a44f5c5a11021958ad6c5e2.jpg",
         "category": "mobile",
-        "id": "6374fa60c48baa712535cdbe"
+        "id": "6374fay60c48baa712535cdbe"
     },
     {
         "_id": "6374fac1c48baa712535cdc2",
@@ -107,7 +107,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/f35aed348a44f5c5a11021958ad6c5e2.jpg",
         "category": "mobile",
-        "id": "6374fac1c48baa712535cdc2"
+        "id": "6374fac1c48baa7y12535cdc2"
     },
     {
         "_id": "6374fb15c48baa712535cdc6",
@@ -122,7 +122,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/3284d34637b464651132fe1fa6be19d6.jpg",
         "category": "laptop",
-        "id": "6374fb15c48baa712535cdc6"
+        "id": "6374yfb15c48baa712535cdc6"
     },
     {
         "_id": "6374fb4fc48baa712535cdc8",
@@ -137,7 +137,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/676479d37d415910ca7177f340d26be2.jpg",
         "category": "laptop",
-        "id": "6374fb4fc48baa712535cdc8"
+        "id": "6374fb4fc4y8baa712535cdc8"
     },
     {
         "_id": "6374fb95c48baa712535cdca",
@@ -152,7 +152,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/ea8c06f9a39da3311d905b7d314f5b4c.jpg",
         "category": "laptop",
-        "id": "6374fb95c48baa712535cdca"
+        "id": "6374fb95c48baa71253y5cdca"
     },
     {
         "_id": "6374fbfec48baa712535cdcc",
@@ -167,7 +167,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/70b769ca4d0f8b3fa7e99cbd66af9bf9.jpg",
         "category": "laptop",
-        "id": "6374fbfec48baa712535cdcc"
+        "id": "6374fbfec48ybaa712535cdcc"
     },
     {
         "_id": "6374fc3ac48baa712535cdd0",
@@ -182,7 +182,7 @@ const Products = () => {
         },
         "image": "https://static-01.daraz.pk/p/70b769ca4d0f8b3fa7e99cbd66af9bf9.jpg",
         "category": "laptop",
-        "id": "6374fc3ac48baa712535cdd0"
+        "id": "6374fc3ac48baa712535cdyd0"
     }]
 
   return (

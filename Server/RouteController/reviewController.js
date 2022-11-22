@@ -29,10 +29,12 @@ exports.createReviews = catchasynchandler(async(req,res)=>{
 })
 
 exports.deleteReview = catchasynchandler(async(req,res)=>{
-    await Review.findByIdAndDelete(req.params.id);
+
+    console.log(req.params.reviewId);
+    await Review.findByIdAndDelete(req.params.reviewId);
     res.status(200).json({
       status: "success",
-      message:"tour deleted"
+      message:"review deleted"
     })
 })
 

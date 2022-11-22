@@ -45,7 +45,7 @@ const ProductSameStore = ({data}) => {
                 { !!data.length ?
                     data?.map((data, index)=>{
                         if(index<5){
-                        return <SingleProduct data={data} />
+                        return <SingleProduct key={data._id} data={data} />
                         }
                     }) : <h3>No Product Left</h3>
                 }

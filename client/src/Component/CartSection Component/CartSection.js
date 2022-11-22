@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import "./CartSection.css"
 import {AiOutlineMinus, AiOutlinePlus} from "react-icons/ai"
 import {MdOutlineDelete} from "react-icons/md"
@@ -6,9 +6,75 @@ import {useGlobalContext} from "../../StateManager/context"
 import axios from "axios"
 
 
-const SingleCart =({data})=>{
-    const [quantityState, setQuantityState] = useState(1);
+const SingleCart = ({data})=>{
+    const [quantityState, setQuantityState] = useState(data.quantity);
+    const {Cart, dispatch} = useGlobalContext();
 
+    const calculatingAmout =(passingArgument)=>{
+        let Amount = 0;
+        if(passingArgument.length){
+            passingArgument.forEach(data => {
+                Amount = Amount + data?.quantity*data?.productId?.price
+            });
+            return Amount
+        }else{
+            return Amount
+        }
+    }
+
+    const addQuantity = async() =>{
+        if(quantityState<5){
+            let passingArgument = {
+                productId: data.productId._id,
+                _id:data._id,
+                quantity: quantityState+1 
+            }   
+            const instance = await axios.create({
+                withCredentials: true
+            })
+              instance.patch(`http://localhost:4000/api/v1/cart`,passingArgument).then((data)=>{
+                console.log(data?.data?.data?.updateUser?.Cart, "hes")
+                const Amount = calculatingAmout(data?.data?.data?.updateUser?.Cart)
+                const passingArgument =
+                { Cart: data?.data?.data?.updateUser?.Cart,
+                  Amount
+                }
+                console.log(passingArgument)
+                dispatch({type: "ADDSUB_CART",
+                        payload: passingArgument
+                    });
+            setQuantityState((prev)=> {
+                return(prev + 1)});
+              });
+        }else{
+            setQuantityState(5)
+        }
+    }
+    const subQuantity = async() =>{
+        if((quantityState>1)){
+            let passingArgument = {
+                productId: data.productId._id,
+                _id:data._id,
+                quantity: quantityState-1 
+            }
+            const instance = await axios.create({
+                withCredentials: true
+            })
+              instance.patch(`http://localhost:4000/api/v1/cart`,passingArgument).then((data)=>{
+                const Amount = calculatingAmout(data?.data?.data?.updateUser?.Cart)
+                const passingArgument =
+                { Cart: data?.data?.data?.updateUser?.Cart,
+                  Amount
+                }
+                dispatch({type: "ADDSUB_CART",
+                        payload: passingArgument
+            })
+            setQuantityState((prev)=> {return(prev - 1)});
+              });
+        }else{
+            setQuantityState(1)
+        }
+    }
 
 
     const deleteHandler = async(e) =>{
@@ -18,13 +84,22 @@ const SingleCart =({data})=>{
         const instance = await axios.create({
             withCredentials: true
           })
-          instance.delete(`http://localhost:4000/api/v1/cart/delete/${CartId}`).then((data)=>{
-            console.log(data)
-          })
+          instance.post(`http://localhost:4000/api/v1/cart/delete/${CartId}`).then((data)=>{
+            console.log(data.data.data.Cart)
 
+            const Amount = calculatingAmout(data.data.data.Cart)
+            const passingArgument = {
+                Cart:data?.data?.data?.Cart,
+                Amount: Amount
+            }
+            console.log(passingArgument)
+            console.log(Cart, "hello world");
+            dispatch({type:"UPDATE__CART", payload:passingArgument})
+
+          });
     }
 
-    return<div className='single__cart'>
+    return<div  className='single__cart'>
             <div className='single__cart__detail'>
                 <img src={data?.productId?.image} />
                 <h3 className='cartproduct__name'>{data?.productId?.name}</h3>
@@ -34,9 +109,9 @@ const SingleCart =({data})=>{
             </div>
             <div className='cartQuantity'>
             <div className='cartQuantityContainer'>
-                <button><AiOutlineMinus /></button>
-                <input type="Number" value={quantityState} min='1' max='5' placeholder="1" />
-                <button><AiOutlinePlus /></button>
+                <button onClick={subQuantity}><AiOutlineMinus /></button>
+                <input bg-disabled="true" readOnly type="Number" value={quantityState} min='1' max='5' placeholder="1" />
+                <button onClick={addQuantity}><AiOutlinePlus /></button>
             </div>
             <button onClick={deleteHandler} className='cartQuantity__delete'><MdOutlineDelete className='cartQuantity__delete_icon'/> </button>
             </div>
@@ -44,14 +119,13 @@ const SingleCart =({data})=>{
 }
  
 const CartSection = () => {
-    const {dispatch, Cart} = useGlobalContext();
-
+    const {dispatch, Cart, CartAmount} = useGlobalContext();
   return (
     <div  className='cartHeroSection'>
     <div className='cartHeroSection__container'>
-            {   !!Cart.length &&
+            {   !!Cart?.length &&
                 Cart.map((data)=>{
-                    return<SingleCart key={data.id} data={data}/>
+                    return<SingleCart key={data._id} data={data}/>
                 })
 
             }
@@ -59,7 +133,7 @@ const CartSection = () => {
     <div className='checkoutSection'>
     <div className='checkoutSection__total'>
         <h2>Total</h2>
-        <h3>Rs 130000</h3>
+        <h3>Rs {CartAmount}</h3>
     </div>
         <button className='checkoutSection__button'>PROCEED TO CHECKOUT</button>
     </div>
