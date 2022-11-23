@@ -4,6 +4,7 @@ import {AiOutlineMinus, AiOutlinePlus} from "react-icons/ai"
 import {MdOutlineDelete} from "react-icons/md"
 import {useGlobalContext} from "../../StateManager/context"
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 
 const SingleCart = ({data})=>{
@@ -39,7 +40,6 @@ const SingleCart = ({data})=>{
                 { Cart: data?.data?.data?.updateUser?.Cart,
                   Amount
                 }
-                console.log(passingArgument)
                 dispatch({type: "ADDSUB_CART",
                         payload: passingArgument
                     });
@@ -92,8 +92,6 @@ const SingleCart = ({data})=>{
                 Cart:data?.data?.data?.Cart,
                 Amount: Amount
             }
-            console.log(passingArgument)
-            console.log(Cart, "hello world");
             dispatch({type:"UPDATE__CART", payload:passingArgument})
 
           });
@@ -120,6 +118,22 @@ const SingleCart = ({data})=>{
  
 const CartSection = () => {
     const {dispatch, Cart, CartAmount} = useGlobalContext();
+    const navigate = useNavigate();
+    const readytoOrderController = () =>{
+
+        if(Cart.length){
+            const passingArgument = {
+                amount:CartAmount,
+                product:Cart
+            }
+            dispatch({type: "READY_TO_CART", payload:passingArgument})
+            navigate("/order");
+
+        }
+
+    }
+
+
   return (
     <div  className='cartHeroSection'>
     <div className='cartHeroSection__container'>
@@ -135,7 +149,7 @@ const CartSection = () => {
         <h2>Total</h2>
         <h3>Rs {CartAmount}</h3>
     </div>
-        <button className='checkoutSection__button'>PROCEED TO CHECKOUT</button>
+        <button onClick={readytoOrderController} className='checkoutSection__button'>PROCEED TO CHECKOUT</button>
     </div>
     </div>
   )

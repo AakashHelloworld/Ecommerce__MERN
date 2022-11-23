@@ -89,9 +89,9 @@ exports.protect = catchAsynceErrorhandler( async(req,res,next)=>{
 
     // check token actually exits or not
     let token;
-    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer') ){
-        token = req.headers.authorization.split(' ')[1];
-    } 
+    // if(req.headers.authorization && req.headers.authorization.startsWith('Bearer') ){
+    //     token = req.headers.authorization.split(' ')[1];
+    // } 
     if(req.headers.cookie){
         token = req.headers.cookie.split('=')[1];
     } 
@@ -124,13 +124,13 @@ exports.protect = catchAsynceErrorhandler( async(req,res,next)=>{
     exports.isme =catchAsynceErrorhandler(async(req, res)=>{
 
         let token;
-     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer') ){
-        token = req.headers.authorization.split(' ')[1];
-    }
+    //  if(req.headers.authorization && req.headers.authorization.startsWith('Bearer') ){
+    //     token = req.headers.authorization.split(' ')[1];
+    // }
 
-    if(req.headers.cookie){
-        token = req.headers.cookie.split('=')[1];
-    }
+    // if(req.headers.cookie){
+    //     token = req.headers.cookie.split('=')[1];
+    // }
 
     if(!token){
         return next(new ErrorHandler("Token is not there", 404));

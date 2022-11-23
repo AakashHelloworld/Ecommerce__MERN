@@ -24,6 +24,7 @@ const Navbar = () => {
       withCredentials: true,
     })
     instance.get("http://localhost:4000/api/v1/users/isme").then((data)=>{
+      console.log(data)
       setUserActive(true)
       const CartAmount = calculatingAmout(data?.data?.user?.Cart)
       const passingData = {Username: data?.data?.user?.Username,
@@ -56,7 +57,7 @@ const Navbar = () => {
         <Link><li>{Username?.toUpperCase()}</li></Link>
         <Link ><li>LOGOFF</li></Link>
         <Link to={"/cart"}><li>CART</li></Link>
-        <Link to={'/order'} >ORDER</Link>
+        <Link to={'/orders'} >ORDER</Link>
         </>
         }
     </div>

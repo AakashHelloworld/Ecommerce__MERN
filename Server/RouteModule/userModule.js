@@ -64,6 +64,12 @@ const usersschema = new mongoose.Schema({
 })
 
 
+usersschema.virtual('orders',{
+    ref: 'Order',
+    foreignField: 'user',
+    localField: '_id'
+});
+
 usersschema.pre('save', async function(next){
     // only run this function if password was actually modified
     if(!this.isModified('Password')) return next();

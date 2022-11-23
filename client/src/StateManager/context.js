@@ -7,7 +7,12 @@ const initialState = {
     Username:"",
     Email: "",
     Cart:[],
-    CartReadytoOrder:[],
+    CartReadytoOrder:[
+      {
+        amount:0,
+        product:[]
+      }
+    ],
 };
 
 const AppProvider = ({ children }) => {

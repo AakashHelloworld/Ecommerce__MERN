@@ -28,3 +28,40 @@
 .single__cart__quantity{
     font-size: 1.4rem;
 }
+
+.order__delivery{
+    background-color: #fafafa;
+}
+.order__delivery__container{
+    padding: 1rem;
+}
+.order__delivery__container h3{
+    color: #757575;
+    font-size: 1.2rem;
+}
+
+.order__delivery__detail__one{
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid #eff0f5;
+    padding: 1rem 0rem;
+}
+
+.delivery_icon{
+    font-size: 2rem;
+}
+
+.order__delivery__detail__one p{
+    max-width: 17rem;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+    color: #202020;
+    }
+
+.order__delivery__detail__one button{
+    background-color: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 1.5rem;
+
+}
