@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const orderModule = new mongoose.Schema({
+const orderschema = new mongoose.Schema({
     user:{
         type:mongoose.Schema.ObjectId,
         required:[true, "cart product must have user"]
@@ -9,6 +9,11 @@ const orderModule = new mongoose.Schema({
     location:{
             type: "string",
             required: [true, "a location must be there"]
+    },
+    amount:{
+        type: Number,
+        required: [true, "Total amount must be there"]
+
     },
     created: {
         type: Date,
@@ -37,17 +42,18 @@ const orderModule = new mongoose.Schema({
 }
 )
 
-orderModule.pre(/^find/, function(next){
-    this.populate({
-        path: 'user',
-        select: 'Username Email',
-    }).populate({
-        path: 'product',
-        select: 'name price shop'
-    })
-});
+orderschema.pre(/^find/, function(next){
+   this.populate({
+        path: 'orderedItems',
+        populate:{
+            path: 'productId',
+            model: 'Product'
+        }
+   })
+    next();
+})
 
 
-const Order = mongoose.model('Order', orderModule)
+const Order = mongoose.model('Order', orderschema)
 // console.log(Product);
 module.exports = Order;

@@ -2,25 +2,10 @@ import React from 'react'
 import "./ShopHeroSection.css"
 import {GoVerified} from "react-icons/go"
 import {AiFillStar} from "react-icons/ai"
+import { Star } from '../../Utils/Star';
+
 const SingleProduct = ({data}) =>{
-    const star =(num)=>{
-        if(num == 1){
-            return <div className='product_icons'><AiFillStar className='product_icon'/></div>
-    
-        }else if(num == 2){
-            return<div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }else if(num ==3){
-            return <div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }else if(num ==4){
-            return <div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }else if(num==5){
-            return <div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }
-    }
+
     return<div className='single_product'>
             <div className='product_image'>
                 <img src={data.image} />
@@ -28,101 +13,17 @@ const SingleProduct = ({data}) =>{
             <div className='product_detail'>
                 <h2 className='product_name'>{data.name.length > 50 ? data.name.slice(0, 50) + "..." :data.name }</h2>
                 <h3 className='product_price'>{`RS:${data.price}`}</h3>
-                {
-                    star(data?.stock)
-                }
+                <Star num={data?.stock} />
             </div>
          </div>
 }
 const ShopHeroSection = () => {
-    const star =(num)=>{
-        if(num == 1){
-            return <div className='product_icons'><AiFillStar className='product_icon'/></div>
-    
-        }else if(num == 2){
-            return<div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }else if(num ==3){
-            return <div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }else if(num ==4){
-            return <div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }else if(num==5){
-            return <div className='product_icons'><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/><AiFillStar className='product_icon'/></div>
-    
-        }
-    }
     const data = {
         "_id": "637479f0014b5383bdc505d0",
         "name": "Everest Tech Shop",
         "description": "here you will get every latest technology",
         "__v": 0,
         "products": [
-            {
-                "_id": "6374f98fc48baa712535cdb8",
-                "name": "Tecno CAMON 19 NEO 128GB ROM + 6GB RAM , Rear Camera 48MP. 1 Year Brand Warranty with Mobile Phone",
-                "price": 367999,
-                "description": "Product details of Tecno CAMON 19 NEO 128GB ROM + 6GB RAM , Rear Camera 48MP. 1 Year Brand Warranty with Mobile Phone",
-                "stock": 5,
-                "shop": {
-                    "_id": "637479f0014b5383bdc505d0",
-                    "name": "Everest Tech Shop",
-                    "id": "637479f0014b5383bdc505d0"
-                },
-                "image": "https://static-01.daraz.pk/p/12ec4379143f462f86fd2611bd88a4a2.jpg",
-                "category": "mobile",
-                "__v": 0,
-                "id": "6374f98fc48baa712535cdb8"
-            },
-            {
-                "_id": "6374f9fdc48baa712535cdba",
-                "name": "Realme C25Y 4-64GB 18W Quick Charge 5000 mAH Battery .1 Year Brand Warranty with Mobile Phone",
-                "price": 29999,
-                "description": "Product details of Tecno CAMON 19 NEO 128GB ROM + 6GB RAM , Rear Camera 48MP. 1 Year Brand Warranty with Mobile Phone",
-                "stock": 5,
-                "shop": {
-                    "_id": "637479f0014b5383bdc505d0",
-                    "name": "Everest Tech Shop",
-                    "id": "637479f0014b5383bdc505d0"
-                },
-                "image": "https://static-01.daraz.pk/p/833c6c3efb5f26f081d34e9d7ce5ff9f.jpg",
-                "category": "mobile",
-                "__v": 0,
-                "id": "6374f9fdc48baa712535cdba"
-            },
-            {
-                "_id": "6374fa60c48baa712535cdbe",
-                "name": "Realme 9 4G 8GB RAM + 128GB ROM. Snapdragon 680 Processor. 1 Year Brand Warranty with Mobile Phone",
-                "price": 63199,
-                "description": "Product details of Realme 9 4G 8GB RAM + 128GB ROM. Snapdragon 680 Processor. 1 Year Brand Warranty with Mobile Phone",
-                "stock": 5,
-                "shop": {
-                    "_id": "637479f0014b5383bdc505d0",
-                    "name": "Everest Tech Shop",
-                    "id": "637479f0014b5383bdc505d0"
-                },
-                "image": "https://static-01.daraz.pk/p/f35aed348a44f5c5a11021958ad6c5e2.jpg",
-                "category": "mobile",
-                "__v": 0,
-                "id": "6374fa60c48baa712535cdbe"
-            },
-            {
-                "_id": "6374fac1c48baa712535cdc2",
-                "name": "Samsung Galaxy A33 5 G RAM 8 GB 128 GB Camera Front 13 MP Back 48 MP",
-                "price": 80500,
-                "description": "Product details of Realme 9 4G 8GB RAM + 128GB ROM. Snapdragon 680 Processor. 1 Year Brand Warranty with Mobile Phone",
-                "stock": 5,
-                "shop": {
-                    "_id": "637479f0014b5383bdc505d0",
-                    "name": "Everest Tech Shop",
-                    "id": "637479f0014b5383bdc505d0"
-                },
-                "image": "https://static-01.daraz.pk/p/f35aed348a44f5c5a11021958ad6c5e2.jpg",
-                "category": "mobile",
-                "__v": 0,
-                "id": "6374fac1c48baa712535cdc2"
-            },
             {
                 "_id": "6374fb15c48baa712535cdc6",
                 "name": "HP 15S-DU3525TU Ci5-1135G7 8GB 1TB 15.6 HD W10 Natural Silver",
@@ -215,9 +116,7 @@ const ShopHeroSection = () => {
         <p className='store__description'>{data.description}</p>
         <h4 className='store_average'>4<span>/5</span></h4>
         </div>
-        {
-            star(4)
-        }
+       <Star num={5} />
     </div>
     <div className='ShopProducts'>
     <h3 className='ShopProducts__primary'>Products</h3>

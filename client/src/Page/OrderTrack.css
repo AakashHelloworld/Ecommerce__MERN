@@ -1,0 +1,100 @@
+
+.order__track{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--ternary);
+}
+
+.order__track_container{
+    margin: 2rem 0rem;
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    padding: 1rem;
+    background-color: white;
+}
+
+.order__track_container div{
+    border-radius: 50% 50%;
+    border: 2px solid gray;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.order__track_container div h3{
+    font-size: 1rem;
+    }
+
+.packaging_icon{
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.receive_icon{
+    font-size: 2rem;
+    color: gray;
+
+}
+.deliver_icon{
+    font-size: 2rem;
+    color: gray;
+
+}
+
+.traveling_icon{
+    font-size: 2rem;
+    color: gray;
+
+}
+
+.receive_icon{
+    font-size: 2rem;
+    color: gray;
+}
+
+.orderHeroSection__container{
+    padding: 3rem;
+    background-color: white;
+}
+
+.orderHeroSection__container__primary{
+    font-size: 1.6rem;
+    color: orange;
+    text-align: end;
+}
+
+.all_orders{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 2rem;
+    background-color: var(--ternary);
+    padding: 2rem;
+    min-height: 80vh;
+}
+
+
+
+.single_order_item{
+    padding: 2rem;
+    background-color: white;
+    height: fit-content;
+}
+
+.single_order_item h3{
+    font-size: 1.5rem;
+}
+.single_order_item h2{
+    font-size: 1.2rem;
+}
+.order_amount_primary span{
+    color:orange;
+}
+
+.order_date_primary span{
+    color: var(--primary);
+}

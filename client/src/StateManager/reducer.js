@@ -20,7 +20,10 @@ const reducer = (state, action)=>{
                 return {...state, Cart, CartAmount}
             }
         }
-
+        case "READY_TO_CART":{
+            const CartReadytoOrder =action.payload;
+            return{...state, CartReadytoOrder}
+        }
     }
 }
 

@@ -1,15 +1,27 @@
-const Order = require("../RouteModule/orderModule");
-const APIFeatures = require("../Utils/appFeatures");
+const Order = require("../RouteModule/orderModule")
 const catchasynchandler = require("../middleware/CatchasyncError");
-const Product = require("../RouteModule/productsModule");
 
 exports.getAllOrders = catchasynchandler(async(req,res)=>{
-    const AllOrder = await Order.find();
+    let filter ={};
+    if(req.user.id) filter={user:req.user.id}
+    const AllOrder = await Order.find(filter);
+    console.log(AllOrder);
     res.status(200).json({
         status: 'success',
-        results: AllOrder.length,
         data: {
             AllOrder 
+        }
+    })
+})
+
+
+exports.getOrder = catchasynchandler(async(req,res)=>{
+    const orderId = req.params.orderId;
+    const singleOrder = await Order.findById(orderId);
+    res.status(200).json({
+        status: 'success',
+        data: {
+            singleOrder 
         }
     })
 })
@@ -19,8 +31,9 @@ exports.createOrder = catchasynchandler(async(req,res)=>{
     const userId = req.user.id;
     const orderBody = req.body;
     if(userId){
-        const Order = {...orderBody, user:userId};
-        const createOrder = await Order.create(Order);
+        const Ordered = {...orderBody, user:userId};
+        console.log(Ordered)
+        const createOrder = await Order.create(Ordered);
         res.status(200).json({
             statu:"success",
             data:{

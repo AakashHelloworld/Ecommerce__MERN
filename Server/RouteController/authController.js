@@ -122,7 +122,6 @@ exports.protect = catchAsynceErrorhandler( async(req,res,next)=>{
 )
 
     exports.isme =catchAsynceErrorhandler(async(req, res)=>{
-
         let token;
      if(req.headers.authorization && req.headers.authorization.startsWith('Bearer') ){
         token = req.headers.authorization.split(' ')[1];
@@ -136,15 +135,16 @@ exports.protect = catchAsynceErrorhandler( async(req,res,next)=>{
         return next(new ErrorHandler("Token is not there", 404));
     }
     const decode = await promisify(jwt.verify)(token, process.env.JSON__SECRET);
+    console.log(decode, token)
     const freshUser = await User.findById(decode.id).populate({
         path: 'Cart',
         populate:{
             path: 'productId',
             model: 'Product',
-            model: 'Product'
-
         }
     })
+    console.log(freshUser)
+
     if(freshUser.changePasswordAfter(decode.iat)){
         return next(new ErrorHandler("User recently changed password! Please log in again", 401))
     }
