@@ -43,10 +43,15 @@ const orderschema = new mongoose.Schema({
 )
 
 orderschema.pre(/^find/, function(next){
-    this.populate({
-        path: 'user',
-        select: 'Username Email',
-    })})
+   this.populate({
+        path: 'orderedItems',
+        populate:{
+            path: 'productId',
+            model: 'Product'
+        }
+   })
+    next();
+})
 
 
 const Order = mongoose.model('Order', orderschema)

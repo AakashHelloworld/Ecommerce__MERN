@@ -25,7 +25,7 @@ const OrderSection = () => {
     const finalOrder =async()=>{
         if(CartReadytoOrder?.amount && CartReadytoOrder.product?.length){
             let Ordered =[];
-            CartReadytoOrder.product.foreach((data)=>{
+            CartReadytoOrder.product.forEach((data)=>{
                 let item ={
                          productId: data.productId._id,
                          quantity:data.quantity

@@ -60,16 +60,21 @@ const usersschema = new mongoose.Schema({
         type: Boolean,
         default: true,
         select: false
-    }
-})
+    },
+},
+{
+    toJSON:{virtuals:true},
+    toObject:{virtuals:true}
+}
+)
 
 
 usersschema.virtual('orders',{
     ref: 'Order',
     foreignField: 'user',
-    localField: '_id'
+    localField: '_id' 
 });
-
+ 
 usersschema.pre('save', async function(next){
     // only run this function if password was actually modified
     if(!this.isModified('Password')) return next();
@@ -78,20 +83,6 @@ usersschema.pre('save', async function(next){
     this.ConfirmPassword = undefined;
     next();
 })
-
-usersschema.pre('/^find/', async function(next){
-    const CartPromise = this.Cart.map( async (data) => {
-        const product = await data.product.populate({
-        path:product,
-        select: 'price'
-    })
-    return{product, quantity: data.quantity}
-})
-this.Cart = Promise.all(CartPromise)
-    next();
-})
-
-
 
 
 usersschema.pre('save', function(next){
